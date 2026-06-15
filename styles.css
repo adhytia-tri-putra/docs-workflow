@@ -54,7 +54,8 @@ h1 { max-width: 650px; margin: 12px 0; font-size: clamp(2.1rem, 5vw, 3.6rem); li
 .button { display: inline-block; padding: 10px 17px; border-radius: 8px; color: white; background: var(--primary); font-weight: 700; text-decoration: none; }
 .button:hover { background: var(--primary-dark); }
 
-.content-section { padding-top: 72px; scroll-margin-top: 40px; }
+.hero, .content-section { scroll-margin-top: 80px; }
+.content-section { padding-top: 72px; }
 h2 { margin: 0 0 10px; font-size: 1.75rem; letter-spacing: -0.025em; }
 h3 { margin: 12px 0 5px; }
 p { color: var(--muted); }
