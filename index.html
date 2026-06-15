@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Dokumentasi sederhana alur kerja Git untuk kolaborasi tim."
+    />
+    <title>Git Workflow Docs</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="#mulai">Git Workflow</a>
+      <button class="menu-button" type="button" aria-expanded="false" aria-controls="navigation">
+        Menu
+      </button>
+      <nav id="navigation" aria-label="Navigasi dokumentasi">
+        <a href="#mulai">Mulai</a>
+        <a href="#branch">Branch</a>
+        <a href="#workflow">Workflow</a>
+        <a href="#commit">Commit</a>
+        <a href="#konflik">Konflik</a>
+      </nav>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar" aria-label="Daftar isi">
+        <p class="sidebar-title">Dokumentasi</p>
+        <a href="#mulai">Persiapan</a>
+        <a href="#branch">Strategi branch</a>
+        <a href="#workflow">Alur kerja harian</a>
+        <a href="#commit">Aturan commit</a>
+        <a href="#pull-request">Pull request</a>
+        <a href="#konflik">Mengatasi konflik</a>
+        <a href="#ringkasan">Cheat sheet</a>
+      </aside>
+
+      <main>
+        <section id="mulai" class="hero">
+          <span class="eyebrow">Panduan Tim</span>
+          <h1>Git workflow yang sederhana dan konsisten.</h1>
+          <p>
+            Panduan praktis untuk membuat branch, menyimpan perubahan, dan mengirim pull request
+            tanpa membuat riwayat repository berantakan.
+          </p>
+          <a class="button" href="#workflow">Lihat alur kerja</a>
+        </section>
+
+        <section class="content-section">
+          <h2>Persiapan awal</h2>
+          <p>Atur identitas Git satu kali sebelum mulai bekerja.</p>
+          <pre><code>git config --global user.name "Nama Kamu"
+git config --global user.email "email@example.com"</code><button class="copy-button" type="button">Salin</button></pre>
+          <p>Clone repository dan masuk ke direktori project.</p>
+          <pre><code>git clone https://github.com/organisasi/project.git
+cd project</code><button class="copy-button" type="button">Salin</button></pre>
+        </section>
+
+        <section id="branch" class="content-section">
+          <h2>Strategi branch</h2>
+          <div class="cards">
+            <article class="card">
+              <code>main</code>
+              <h3>Production</h3>
+              <p>Berisi kode stabil dan siap dirilis. Hindari commit langsung ke branch ini.</p>
+            </article>
+            <article class="card">
+              <code>feature/*</code>
+              <h3>Fitur baru</h3>
+              <p>Gunakan untuk pengembangan fitur, misalnya <code>feature/login</code>.</p>
+            </article>
+            <article class="card">
+              <code>fix/*</code>
+              <h3>Perbaikan</h3>
+              <p>Gunakan untuk perbaikan bug, misalnya <code>fix/navbar-mobile</code>.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="workflow" class="content-section">
+          <h2>Alur kerja harian</h2>
+          <ol class="steps">
+            <li>
+              <div><strong>Perbarui branch utama</strong><span>Pastikan pekerjaan dimulai dari versi terbaru.</span></div>
+              <pre><code>git switch main
+git pull origin main</code><button class="copy-button" type="button">Salin</button></pre>
+            </li>
+            <li>
+              <div><strong>Buat branch pekerjaan</strong><span>Pilih nama singkat yang menjelaskan tujuan perubahan.</span></div>
+              <pre><code>git switch -c feature/nama-fitur</code><button class="copy-button" type="button">Salin</button></pre>
+            </li>
+            <li>
+              <div><strong>Simpan perubahan</strong><span>Periksa file sebelum membuat commit.</span></div>
+              <pre><code>git status
+git add .
+git commit -m "feat: tambah nama fitur"</code><button class="copy-button" type="button">Salin</button></pre>
+            </li>
+            <li>
+              <div><strong>Kirim branch</strong><span>Push branch lalu buat pull request di GitHub atau GitLab.</span></div>
+              <pre><code>git push -u origin feature/nama-fitur</code><button class="copy-button" type="button">Salin</button></pre>
+            </li>
+          </ol>
+        </section>
+
+        <section id="commit" class="content-section">
+          <h2>Aturan commit</h2>
+          <p>Gunakan format <code>tipe: deskripsi singkat</code> agar riwayat mudah dibaca.</p>
+          <div class="commit-list">
+            <p><code>feat:</code> fitur baru</p>
+            <p><code>fix:</code> perbaikan bug</p>
+            <p><code>docs:</code> perubahan dokumentasi</p>
+            <p><code>refactor:</code> perubahan kode tanpa mengubah perilaku</p>
+            <p><code>test:</code> penambahan atau perbaikan test</p>
+            <p><code>chore:</code> tugas pemeliharaan</p>
+          </div>
+          <div class="note"><strong>Contoh:</strong> <code>fix: perbaiki validasi email saat login</code></div>
+        </section>
+
+        <section id="pull-request" class="content-section">
+          <h2>Pull request</h2>
+          <ul class="checklist">
+            <li>Judul menjelaskan perubahan dengan singkat.</li>
+            <li>Deskripsi memuat alasan dan dampak perubahan.</li>
+            <li>Test sudah dijalankan dan berhasil.</li>
+            <li>Perubahan sudah ditinjau sendiri sebelum meminta review.</li>
+            <li>Gabungkan setelah mendapat persetujuan reviewer.</li>
+          </ul>
+        </section>
+
+        <section id="konflik" class="content-section">
+          <h2>Mengatasi konflik</h2>
+          <p>Perbarui branch pekerjaan, selesaikan penanda konflik di editor, lalu commit hasilnya.</p>
+          <pre><code>git switch feature/nama-fitur
+git fetch origin
+git merge origin/main
+# perbaiki file yang konflik
+git add .
+git commit -m "chore: selesaikan merge conflict"</code><button class="copy-button" type="button">Salin</button></pre>
+          <div class="warning"><strong>Penting:</strong> Jangan menghapus perubahan rekan satu tim tanpa memahami konteksnya.</div>
+        </section>
+
+        <section id="ringkasan" class="content-section">
+          <h2>Cheat sheet</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Tujuan</th><th>Command</th></tr></thead>
+              <tbody>
+                <tr><td>Lihat status</td><td><code>git status</code></td></tr>
+                <tr><td>Lihat branch</td><td><code>git branch</code></td></tr>
+                <tr><td>Lihat riwayat ringkas</td><td><code>git log --oneline --graph</code></td></tr>
+                <tr><td>Batalkan perubahan file</td><td><code>git restore nama-file</code></td></tr>
+                <tr><td>Simpan sementara</td><td><code>git stash</code></td></tr>
+                <tr><td>Ambil simpanan</td><td><code>git stash pop</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <footer>Git Workflow Docs &middot; Dibuat untuk membantu kolaborasi tim.</footer>
+  </body>
+</html>
